@@ -13,21 +13,18 @@ const App = () => {
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
 
-  useEffect (() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude} }) => {
-        setCoordinates({ lat: latitude, lng: longitude })
-    })
+        setCoordinates({ lat: latitude, lng: longitude });
+    });
   }, []);
 
   useEffect(() => {
-      console.log(coordinates, bounds);
-
-      getPlacesData(bounds.sw, bounds.ne)
+      getPlacesData(/* bounds.sw, bounds.ne */)
         .then((data) => {
-          console.log(data);
           setPlaces(data);
-        })
-  }), [coordinates, bounds];
+        });
+  }, [coordinates, bounds]);
 
   return (
     <>
