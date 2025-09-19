@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
+import { styled } from "@mui/material/styles";
 
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 import useStyles from './styles';
+
+const Container = styled("div")(({ theme }) => ({
+    padding: '25px',
+}));
+
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+    margin: theme.spacing(1),
+    minWidth: 120,
+    marginBottom: '30px',
+}));
+
+const GridList = styled(Grid)(({ theme }) => ({
+    height: '75vh', 
+    overflow: 'auto',
+}));
 
 const List = () => {
     const classes = useStyles();
@@ -23,17 +39,17 @@ const List = () => {
     ];
 
     return (
-        <div className={classes.container}>
+        <Container>
             <Typography variant="h4">Restaurants, Hotels & Attractions around you</Typography>
-            <FormControl className={classes.formControl}>
+            <StyledFormControl>
                 <InputLabel>Type</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
                     <MenuItem value="restaurants">Restaurants</MenuItem>
                     <MenuItem value="hotels">Hotels</MenuItem>
                     <MenuItem value="attractions">Attractions</MenuItem>
                 </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
+            </StyledFormControl>
+            <StyledFormControl>
                 <InputLabel>Rating</InputLabel>
                 <Select value={rating} onChange={(e) => setRating(e.target.value)}>
                     <MenuItem value={0}>All</MenuItem>
@@ -41,15 +57,15 @@ const List = () => {
                     <MenuItem value={4}>Above 4.0</MenuItem>
                     <MenuItem value={4.5}>Above 4.5</MenuItem>
                 </Select>
-            </FormControl>
-            <Grid container spacing={3} className={classes.list}>
+            </StyledFormControl>
+            <GridList container spacing={3}>
                 {places?.map((place, i) => (
                     <Grid key={i} size={{ xs: 12 }}>
                         <PlaceDetails place={place} />
                     </Grid>
                 ))}
-            </Grid>
-        </div>
+            </GridList>
+        </Container>
     );
 }
 
