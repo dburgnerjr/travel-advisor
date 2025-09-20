@@ -3,15 +3,21 @@ import GoogleMapReact from 'google-map-react';
 import { Paper, Typography, useMediaQuery } from '@mui/material';
 import { LocationOnOutlined } from '@mui/icons-material';
 import Rating from '@mui/material';
+import { styled } from "@mui/material/styles";
 
 import useStyles from './styles';
 
+const MapContainer = styled("div")(({ theme }) => ({
+    height: '85vh',
+    width: '100%',
+}));
+
 const Map = ({ setCoordinates, setBounds, coordinates }) => {
-    const classes = useStyles();
+    //const classes = useStyles();
     const isMobile = useMediaQuery('(min-width:600px)');
 
     return (
-        <div className={classes.mapContainer}>
+        <MapContainer>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCSBI1qxePUu4jLU2HpwCYy4grV4b4m0BM' }}
                 defaultCenter={coordinates}
@@ -23,12 +29,12 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
                     console.log(e);
                     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
-                }}
-                onChildClick={''}
+                }}               
+               onChildClick={''}
             >
 
             </GoogleMapReact>
-        </div>
+        </MapContainer>
     );
 }
 
