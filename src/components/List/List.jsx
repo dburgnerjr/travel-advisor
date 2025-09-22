@@ -21,7 +21,7 @@ const GridList = styled(Grid)(({ theme }) => ({
     overflow: 'auto',
 }));
 
-const List = ({ places }) => {
+const List = ({ places, childClicked }) => {
     const classes = useStyles();
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
