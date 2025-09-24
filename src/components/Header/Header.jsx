@@ -48,7 +48,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const Header = () => {
+const Header = ({ onPlaceChanged, onLoad }) => {
     return (
         <AppBar position="static">
             <ToolbarStyled>
@@ -59,14 +59,14 @@ const Header = () => {
                     <Title variant="h6">
                         Explore new places
                     </Title>
-                    {/* <Autocomplete> */}
+                    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                         <SearchDiv>
                             <SearchIconDiv>
                                 <SearchIcon />
                             </SearchIconDiv>
                             <StyledInputBase placeholder="Search ... " />
                         </SearchDiv>
-                    {/* </Autocomplete> */}
+                    </Autocomplete>
                 </Box>
             </ToolbarStyled>
         </AppBar>
