@@ -38,7 +38,6 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
         <MapContainer>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-                defaultCenter={coordinates}
                 center={coordinates}
                 defaultZoom={14}
                 margins={[50, 50, 50, 50]}
@@ -74,11 +73,11 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
                         }
                     </MarkerContainer>
                 ))}
-                {weatherData?.list?.map((data, i) => (
+                {/* {weatherData?.list?.map((data, i) => (
                     <div key={i} lat={data.coord.lat} lng={data.coord.lng}>
                         <img src={`https://open-weather13.p.rapidapi.com/img/w/${data.weather[0].icon}.png`}></img>
                     </div>
-                ))}
+                ))} */}
             </GoogleMapReact>
         </MapContainer>
     );

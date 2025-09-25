@@ -14,14 +14,13 @@ export const getPlacesData = async(type, sw, ne) => {
                 'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
             }
         });
-        console.log(data);
         return data;
     } catch (error) {
         console.log(error)
     }
 }
 
-export const getWeatherData = async (lat, lng) => {
+/* export const getWeatherData = async (lat, lng) => {
     try {
         const { data } = await axios.get('https://open-weather13.p.rapidapi.com/latlon', {
             params: {
@@ -33,9 +32,9 @@ export const getWeatherData = async (lat, lng) => {
                 'x-rapidapi-host': 'open-weather13.p.rapidapi.com'
             }
         });
-
+        console.log(data);
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+} */
