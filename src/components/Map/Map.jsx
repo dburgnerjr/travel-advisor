@@ -49,7 +49,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
                 }}               
                onChildClick={(child) => setChildClicked(child)}
             >
-                {places.length && places?.map((place, i) => (
+                {places?.map((place, i) => (
                     <MarkerContainer
                         lat={place.latitude}
                         lng={place.longitude}

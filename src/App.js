@@ -34,7 +34,7 @@ const App = () => {
     setFilteredPlaces(filteredPlaces);
   }, [rating]);
 
-    useEffect(() => {
+  useEffect(() => {
       if(bounds.sw && bounds.ne) {
         setIsLoading(true);
 
