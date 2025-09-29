@@ -8,22 +8,20 @@ import List from './components/List/List';
 import Map from './components/Map/Map';
 
 const App = () => {
-  const [places, setPlaces] = useState([]);
-  //const [weatherData, setWeatherData] = useState([]);
-  const [filteredPlaces, setFilteredPlaces] = useState([]);
-
-  const [childClicked, setChildClicked] = useState(null);
-  const [autocomplete, setAutoComplete] = useState(null);
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
 
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
 
+  //const [weatherData, setWeatherData] = useState([]);
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [places, setPlaces] = useState([]);
+  
+  const [autocomplete, setAutoComplete] = useState(null);
+  const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [type, setType] = useState('restaurants');
-  const [rating, setRating] = useState('');
-
-  const onLoad = (autoC) => setAutoComplete(autoC);
-
+  
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude} }) => {
         setCoordinates({ lat: latitude, lng: longitude });
@@ -36,15 +34,7 @@ const App = () => {
     setFilteredPlaces(filteredPlaces);
   }, [rating]);
 
-  const onPlaceChanged = () => {
-    const lat = autocomplete.getPlace().geometry.location.lat();
-    const lng = autocomplete.getPlace().geometry.location.lng();
-
-    setCoordinates({ lat, lng });
-  }
-
-  
-  useEffect(() => {
+    useEffect(() => {
       if(bounds.sw && bounds.ne) {
         setIsLoading(true);
 
@@ -60,7 +50,16 @@ const App = () => {
           });
       }
   }, [type, bounds]);
- 
+
+  const onLoad = (autoC) => setAutoComplete(autoC);
+
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
+
+    setCoordinates({ lat, lng });
+  };
+
   return (
     <>
       <CssBaseline />
@@ -68,9 +67,9 @@ const App = () => {
       <Grid container spacing={3} style={{ width: '100%' }}>
           <Grid size={{ xs: 12, md: 4 }}>
             <List 
+              isLoading={isLoading}
               places={filteredPlaces.length ? filteredPlaces : places} 
               childClicked={childClicked}
-              isLoading={isLoading}
               type={type}
               setType={setType}
               rating={rating}
@@ -79,11 +78,11 @@ const App = () => {
           </Grid>
           <Grid size={{ xs: 12, md: 8 }}>
             <Map
-              setCoordinates={setCoordinates}
+              setChildClicked={setChildClicked}
               setBounds={setBounds}
+              setCoordinates={setCoordinates}
               coordinates={coordinates}
               places={filteredPlaces.length ? filteredPlaces : places} 
-              setChildClicked={setChildClicked}
               // weatherData={weatherData}
             />
           </Grid>

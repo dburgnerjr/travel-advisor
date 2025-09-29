@@ -63,7 +63,7 @@ const List = ({ places, childClicked, isLoading, type, setType, rating, setRatin
                     </StyledFormControl>
                     <GridList container spacing={3}>
                         {places?.map((place, i) => (
-                            <Grid key={i} size={{ xs: 12 }}>
+                            <Grid ref={elRefs[i]} key={i} size={{ xs: 12 }}>
                                 <PlaceDetails 
                                     place={place}
                                     selected={Number(childClicked) === i}

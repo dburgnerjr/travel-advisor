@@ -49,7 +49,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
                 }}               
                onChildClick={(child) => setChildClicked(child)}
             >
-                {places?.map((place, i) => (
+                {places.length && places?.map((place, i) => (
                     <MarkerContainer
                         lat={place.latitude}
                         lng={place.longitude}
@@ -67,7 +67,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
                                         src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
                                         alt={place.name}
                                     />
-                                    <Rating size="small" value={Number(place.rating)} readOnly />
+                                    <Rating name="read-only" size="small" value={Number(place.rating)} readOnly />
                                 </StyledPaper>
                             )
                         }
